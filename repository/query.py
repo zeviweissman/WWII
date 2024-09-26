@@ -44,3 +44,5 @@ normalize_targets_query = text("""
                         LEFT JOIN type t ON m.target_type = t.type
                         ON CONFLICT (priority, location_id, type_id) DO NOTHING;
                         """)
+
+
