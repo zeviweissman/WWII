@@ -54,3 +54,10 @@ def update_target(target: Target) -> Result[Target, str]:
         except SQLAlchemyError as e:
             return Failure(e)
 
+
+def get_all_targets() -> Maybe[List[Target]]:
+    with session_factory() as session:
+        return Maybe.from_optional(
+            session.query(Target).all()
+        )
+

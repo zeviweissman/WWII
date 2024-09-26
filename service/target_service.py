@@ -20,6 +20,13 @@ def get_target_by_id(target_id):
         .map(asdict)
     )
 
+def get_all_targets():
+    return (
+        target_repos.get_all_targets()
+        .map(lambda li: {"targets":[asdict(trgt) for trgt in li]})
+    )
+
+
 def delete_target_by_id(target_id):
     return (
         target_repos.delete_target_by_id(target_id)
