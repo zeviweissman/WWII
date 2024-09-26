@@ -8,12 +8,19 @@ target_blueprint = Blueprint("mission", __name__)
 
 @target_blueprint.route('/<int:target_id>', methods=['GET'])
 def get_target_by_id(target_id):
-    return jsonify({}, 400)
+    return (
+            target_service.get_target_by_id(target_id)
+            .map(lambda target: (jsonify(target), 200 ))
+            .value_or((jsonify({}), 400))
+            )
 
-@target_blueprint.route('/', methods=['GET'])
-def get_all_targets():
-    return jsonify({}, 400)
-
+@target_blueprint.route('/delete/<int:target_id>', methods=['DELETE'])
+def delete_target_by_id(target_id):
+    return (
+            target_service.delete_target_by_id(target_id)
+            .map(lambda target: (jsonify(target), 200 ))
+            .value_or((jsonify({}), 400))
+            )
 
 
 @target_blueprint.route('/create', methods=['POST'])

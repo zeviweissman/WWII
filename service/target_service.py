@@ -22,3 +22,14 @@ def insert_target(target_json: Dict[str, str]) -> Maybe[Target]:
             .map(asdict)
             )
 
+def get_target_by_id(target_id):
+    return (
+        target_repos.get_target_by_id(target_id)
+        .map(asdict)
+    )
+
+def delete_target_by_id(target_id):
+    return (
+        target_repos.delete_target_by_id(target_id)
+        .map(asdict)
+    )
