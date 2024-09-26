@@ -6,7 +6,7 @@ from sqlalchemy.orm import Relationship
 class Country(Base):
     __tablename__ = "country"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    country = Column(String, nullable=False)
+    country = Column(String, nullable=False, unique=True)
     locations = Relationship("Location", back_populates='country')
 
 

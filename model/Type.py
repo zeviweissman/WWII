@@ -6,7 +6,7 @@ from sqlalchemy.orm import Relationship
 class Type(Base):
     __tablename__ = "type"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    type = Column(String, nullable=False)
+    type = Column(String, nullable=False, unique=True)
     targets = Relationship("Target", back_populates='type')
 
 
