@@ -8,7 +8,7 @@ from utils.target_utils import *
 
 
 def convert_to_target(target_json: Dict[str, str]) -> Maybe[Target]:
-    return pipe(
+    return t.pipe(
         target_json,
         target_has_all_keys,
         t.partial(return_target_if_json_has_all_keys, target_json)
