@@ -44,7 +44,9 @@ def update_target(target: Target) -> Result[Target, str]:
     with session_factory() as session:
         try:
             if target_to_update := session.get(Target, target.id):
-                target_to_update = target
+                target_to_update.location_id = target.location_id
+                target_to_update.priority = target.priority
+                target_to_update.type_id = target.type_id
                 session.commit()
                 return Success(target_to_update)
             else:

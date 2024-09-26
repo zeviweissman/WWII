@@ -7,17 +7,9 @@ from typing import Dict
 from utils.target_utils import *
 
 
-def convert_to_target(target_json: Dict[str, str]) -> Maybe[Target]:
-    return t.pipe(
-        target_json,
-        target_has_all_keys,
-        t.partial(return_target_if_json_has_all_keys, target_json)
-    )
-
-
 def insert_target(target_json: Dict[str, str]) -> Maybe[Target]:
     return (
-            convert_to_target(target_json)
+            convert_to_target_for_create(target_json)
             .bind(target_repos.insert_target)
             .map(asdict)
             )
@@ -33,3 +25,11 @@ def delete_target_by_id(target_id):
         target_repos.delete_target_by_id(target_id)
         .map(asdict)
     )
+
+
+def update_target(target_json: Dict[str, str]) -> Maybe[Target]:
+    return (
+            convert_to_target_for_update(target_json)
+            .bind(target_repos.update_target)
+            .map(asdict)
+            )

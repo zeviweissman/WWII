@@ -30,3 +30,12 @@ def create_target():
             .map(lambda target: (jsonify(target), 201 ))
             .value_or((jsonify({}), 400))
             )
+
+
+@target_blueprint.route('/update', methods=['PUT'])
+def update_target():
+    return (
+        target_service.update_target(request.json)
+        .map(lambda target: (jsonify(target), 201))
+        .value_or((jsonify({}), 400))
+    )
